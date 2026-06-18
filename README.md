@@ -1,3 +1,5 @@
+> **Fork pessoal** — Este repositório contém modificações pessoais (cursor customizado, partículas, stamps, fundo) adicionadas sobre o projeto original. Veja [MODS.md](MODS.md) para detalhes.
+
 <a href="https://super-productivity.com/"><img alt="Banner" src="docs/screens/banner.png"/></a>
 
 <div style="height:20px;"></div>
