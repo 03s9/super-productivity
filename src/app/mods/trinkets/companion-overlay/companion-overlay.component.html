@@ -1,0 +1,20 @@
+<canvas
+  #canvas
+  class="overlay-canvas"
+></canvas>
+@for (c of _svc.placedCompanions(); track c.trinketId) {
+  <div
+    class="companion-handle"
+    [style.left.%]="c.x * 100"
+    [style.top.%]="c.y * 100"
+    (mousedown)="onDragStart($event, c.trinketId)"
+  >
+    <button
+      class="remove-btn"
+      title="Remover da tela"
+      (click)="onRemove(c.trinketId)"
+    >
+      ✕
+    </button>
+  </div>
+}

@@ -15,40 +15,15 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { TrinketService } from '../trinket.service';
-import { TrinketDef, TrinketRarity, RARITY_COLOR, RARITY_LABEL } from '../trinket.model';
+import {
+  TrinketDef,
+  TrinketRarity,
+  RARITY_COLOR,
+  RARITY_LABEL,
+  ANIMAL_COLORS,
+} from '../trinket.model';
 
 const SPOTS_PER_ROW = 8;
-
-// Colors keyed by the actual trinket id (matches trinkets.json "id" field).
-// Applied whenever the GLB material has no embedded texture — overrides the
-// neutral/gray default the GLTF exporter bakes in. Map avoids naming-convention
-// lint errors that object literals with hyphenated keys would trigger.
-const ANIMAL_COLORS = new Map<string, number>([
-  ['animal-cat', 0xe8975a],
-  ['animal-dog', 0xc4813a],
-  ['animal-bunny', 0xf0ddc8],
-  ['animal-chick', 0xf5d84a],
-  ['animal-pig', 0xf0a8a0],
-  ['animal-fish', 0x5ab4f0],
-  ['animal-bee', 0xf5c832],
-  ['animal-parrot', 0x45c832],
-  ['animal-penguin', 0x404848],
-  ['animal-fox', 0xe07030],
-  ['animal-beaver', 0x8a5c2c],
-  ['animal-koala', 0x909090],
-  ['animal-cow', 0xe8e4d8],
-  ['animal-monkey', 0xc48030],
-  ['animal-deer', 0xc8924a],
-  ['animal-panda', 0xe8e8e8],
-  ['animal-crab', 0xe83030],
-  ['animal-caterpillar', 0x60c040],
-  ['animal-hog', 0xe0a0c0],
-  ['animal-polar', 0xf0f0f8],
-  ['animal-elephant', 0x8090a8],
-  ['animal-giraffe', 0xe8c850],
-  ['animal-lion', 0xe0a840],
-  ['animal-tiger', 0xe87030],
-]);
 const SHELF_WIDTH = 9;
 const SHELF_GAP_Y = 1.9;
 const SHELF_HEIGHTS = [-0.2, SHELF_GAP_Y - 0.2, SHELF_GAP_Y * 2 - 0.2];
@@ -90,6 +65,18 @@ export class TrophyShelfComponent implements OnDestroy {
 
   setFeatured(id: string): void {
     this._svc.setFeatured(id);
+  }
+
+  isPlaced(id: string): boolean {
+    return this._svc.placedCompanions().some((c) => c.trinketId === id);
+  }
+
+  placeOnScreen(id: string): void {
+    if (this.isPlaced(id)) {
+      this._svc.removeCompanion(id);
+    } else {
+      this._svc.placeCompanion(id);
+    }
   }
 
   private _renderer!: THREE.WebGLRenderer;

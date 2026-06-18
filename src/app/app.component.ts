@@ -94,6 +94,7 @@ import { ModsService } from './mods/mods.service';
 import { TrinketService } from './mods/trinkets/trinket.service';
 import { TrophyShelfComponent } from './mods/trinkets/trophy-shelf/trophy-shelf.component';
 import { LootboxPopupComponent } from './mods/trinkets/lootbox-popup/lootbox-popup.component';
+import { CompanionOverlayComponent } from './mods/trinkets/companion-overlay/companion-overlay.component';
 
 const ONBOARDING_PRESET_EXIT_DELAY = 1000;
 const ONBOARDING_ENTRANCE_COMPLETE_DELAY = 2000;
@@ -155,6 +156,7 @@ export const getBackgroundImageBlur = (context: WorkContextThemeSource): number 
     BackgroundComponent,
     TrophyShelfComponent,
     LootboxPopupComponent,
+    CompanionOverlayComponent,
   ],
 })
 export class AppComponent implements OnDestroy, AfterViewInit {

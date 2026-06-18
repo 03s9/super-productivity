@@ -61,6 +61,14 @@
             <mat-icon>push_pin</mat-icon>
             {{ featuredId() === t.id ? 'Destacado ✓' : 'Destacar' }}
           </button>
+          <button
+            class="feature-btn"
+            [class.is-featured]="isPlaced(t.id)"
+            (click)="placeOnScreen(t.id)"
+          >
+            <mat-icon>open_with</mat-icon>
+            {{ isPlaced(t.id) ? 'Na tela ✓' : 'Colocar na tela' }}
+          </button>
         </div>
         <button
           class="info-close"

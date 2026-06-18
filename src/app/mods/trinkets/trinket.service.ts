@@ -7,6 +7,7 @@ import {
   TrinketRarity,
   TrinketState,
   PendingUnlock,
+  PlacedCompanion,
   RARITY_COINS,
 } from './trinket.model';
 import TRINKETS_DATA from '../../../assets/trinkets/trinkets.json';
@@ -41,6 +42,7 @@ export class TrinketService {
   readonly totalDone = computed(() => this._state().totalDone);
   readonly coins = computed(() => this._state().coins);
   readonly featuredId = computed(() => this._state().featuredId);
+  readonly placedCompanions = computed(() => this._state().placedCompanions);
 
   readonly featuredPreview = computed(() => {
     const id = this._state().featuredId;
@@ -74,6 +76,34 @@ export class TrinketService {
     const state = this._state();
     const nextId = state.featuredId === id ? '' : id;
     this._save({ ...state, featuredId: nextId });
+  }
+
+  placeCompanion(trinketId: string): void {
+    const state = this._state();
+    if (state.placedCompanions.some((c) => c.trinketId === trinketId)) return;
+    if (state.placedCompanions.length >= 6) return;
+    this._save({
+      ...state,
+      placedCompanions: [...state.placedCompanions, { trinketId, x: 0.15, y: 0.75 }],
+    });
+  }
+
+  removeCompanion(trinketId: string): void {
+    const state = this._state();
+    this._save({
+      ...state,
+      placedCompanions: state.placedCompanions.filter((c) => c.trinketId !== trinketId),
+    });
+  }
+
+  updateCompanionPosition(trinketId: string, x: number, y: number): void {
+    const state = this._state();
+    this._save({
+      ...state,
+      placedCompanions: state.placedCompanions.map((c) =>
+        c.trinketId === trinketId ? { ...c, x, y } : c,
+      ),
+    });
   }
 
   private _onTaskDone(): void {
@@ -137,11 +167,18 @@ export class TrinketService {
           totalDone: saved.totalDone ?? 0,
           coins: saved.coins ?? 0,
           featuredId: saved.featuredId ?? '',
+          placedCompanions: (saved.placedCompanions ?? []) as PlacedCompanion[],
         };
       }
     } catch (_) {
       /* ignore */
     }
-    return { unlockedIds: [], totalDone: 0, coins: 0, featuredId: '' };
+    return {
+      unlockedIds: [],
+      totalDone: 0,
+      coins: 0,
+      featuredId: '',
+      placedCompanions: [],
+    };
   }
 }
