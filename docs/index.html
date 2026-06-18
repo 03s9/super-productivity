@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Super Productivity — Mods by 03s9</title>
+    <link
+      rel="stylesheet"
+      href="style.css"
+    />
+  </head>
+  <body>
+    <header class="hero">
+      <div class="hero-inner">
+        <span class="badge">Fork pessoal</span>
+        <h1>Super Productivity <span class="accent">Mods</span></h1>
+        <p class="subtitle">
+          Camada de personalização visual adicionada ao
+          <a
+            href="https://github.com/johannesjo/super-productivity"
+            target="_blank"
+            >Super Productivity</a
+          >
+          original. Cursor customizado, partículas, stamps arrastáveis e fundo interativo
+          — tudo salvo localmente.
+        </p>
+        <div class="btn-row">
+          <a
+            class="btn btn-primary"
+            href="https://github.com/03s9/super-productivity/archive/refs/heads/master.zip"
+          >
+            &#8681; Baixar ZIP
+          </a>
+          <a
+            class="btn"
+            href="https://github.com/03s9/super-productivity"
+            target="_blank"
+          >
+            Ver código
+          </a>
+          <a
+            class="btn"
+            href="https://github.com/johannesjo/super-productivity"
+            target="_blank"
+          >
+            Projeto original
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="section">
+        <h2 class="section-title">Funcionalidades</h2>
+        <div class="grid-4">
+          <div class="card">
+            <div class="card-icon icon-blue">&#9654;</div>
+            <h3>Cursor customizado</h3>
+            <p>
+              Presets prontos (anime, coração, estrela, varinha, Mummy) ou suba seu
+              próprio PNG/GIF para o estado normal e hover separadamente. Controle de
+              tamanho e opacidade.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="card-icon icon-purple">&#9670;</div>
+            <h3>Fundo personalizado</h3>
+            <p>
+              Cor sólida ou imagem (upload ou URL) com controles de desfoque e opacidade.
+              Renderizado como camada fixa sem afetar o layout do app.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="card-icon icon-teal">&#10022;</div>
+            <h3>Partículas</h3>
+            <p>
+              8 modos: estrelas, pétalas, neve, bolhas, confete, matrix, vagalumes e
+              brilhos. Controles de quantidade, velocidade, opacidade e cor. Roda fora do
+              Angular zone.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="card-icon icon-coral">&#9632;</div>
+            <h3>Stamps</h3>
+            <p>
+              Imagens arrastáveis sobre a interface. 4 formatos alteráveis on the fly:
+              quadrado, oval, retângulo horizontal e vertical. Posição salva
+              automaticamente.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-alt">
+        <h2 class="section-title">Screenshots</h2>
+        <div class="screenshots-grid">
+          <div class="screenshot-placeholder">
+            <span>Painel de mods</span>
+            <small>Adicione screenshots na pasta docs/screenshots/</small>
+          </div>
+          <div class="screenshot-placeholder">
+            <span>Cursor customizado</span>
+            <small>Adicione screenshots na pasta docs/screenshots/</small>
+          </div>
+          <div class="screenshot-placeholder">
+            <span>Partículas + fundo</span>
+            <small>Adicione screenshots na pasta docs/screenshots/</small>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">Como instalar</h2>
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-body">
+              <h4>Clone o repositório</h4>
+              <code>git clone https://github.com/03s9/super-productivity.git</code>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-body">
+              <h4>Instale as dependências</h4>
+              <code>npm install</code>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-body">
+              <h4>Rode no navegador</h4>
+              <code>npx ng serve</code>
+              <p>
+                Abra <strong>localhost:4200</strong> no navegador. O botão de mods aparece
+                no canto inferior direito.
+              </p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-num">4</div>
+            <div class="step-body">
+              <h4>Ou gere o executável</h4>
+              <code>npx ng build --configuration development</code>
+              <code>npx electron-builder --win --dir</code>
+              <p>O executável fica em <strong>.tmp/app-builds/win-unpacked/</strong></p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-alt">
+        <h2 class="section-title">Notas técnicas</h2>
+        <div class="grid-2">
+          <div class="note">
+            <h4>Persistência</h4>
+            <p>
+              Toda configuração é salva em <code>localStorage</code> como base64. Funciona
+              no Electron sem servidor.
+            </p>
+          </div>
+          <div class="note">
+            <h4>Cursores .ani</h4>
+            <p>
+              O formato <code>.ani</code> (Windows Animated Cursor) não é suportado por
+              nenhum browser moderno via CSS. Use PNG, GIF ou WebP.
+            </p>
+          </div>
+          <div class="note">
+            <h4>Performance</h4>
+            <p>
+              Partículas e drag de stamps rodam fora do Angular zone para não impactar a
+              detecção de mudanças do app.
+            </p>
+          </div>
+          <div class="note">
+            <h4>Sem dependências novas</h4>
+            <p>
+              Nenhuma biblioteca adicional foi adicionada. Apenas APIs nativas: Canvas,
+              Pointer Events, Web Audio.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>
+        Todo o crédito pelo aplicativo original é de
+        <a
+          href="https://github.com/johannesjo"
+          target="_blank"
+          >Johannes Millan (johannesjo)</a
+        >
+        e dos
+        <a
+          href="https://github.com/johannesjo/super-productivity/graphs/contributors"
+          target="_blank"
+          >contribuidores do Super Productivity</a
+        >. Este fork adiciona apenas uma camada de personalização visual por cima do
+        trabalho deles.
+      </p>
+      <p class="footer-links">
+        <a
+          href="https://github.com/johannesjo/super-productivity"
+          target="_blank"
+          >&#9733; Star o original</a
+        >
+        &nbsp;&middot;&nbsp;
+        <a
+          href="https://github.com/03s9/super-productivity/blob/master/MODS.md"
+          target="_blank"
+          >MODS.md</a
+        >
+        &nbsp;&middot;&nbsp;
+        <a
+          href="https://github.com/03s9/super-productivity"
+          target="_blank"
+          >Fork no GitHub</a
+        >
+      </p>
+    </footer>
+  </body>
+</html>
