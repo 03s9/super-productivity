@@ -12,8 +12,11 @@ import { MatTooltip } from '@angular/material/tooltip';
 import { MatSlider, MatSliderThumb } from '@angular/material/slider';
 import { MatSlideToggle } from '@angular/material/slide-toggle';
 import { ModsService, CursorPreset, ParticleMode, StampShape } from '../mods.service';
+import { TrinketService } from '../trinkets/trinket.service';
+import { TrinketShelfComponent } from '../trinkets/trinket-shelf/trinket-shelf.component';
+import { LootboxPopupComponent } from '../trinkets/lootbox-popup/lootbox-popup.component';
 
-type Tab = 'cursor' | 'bg' | 'particles' | 'stamps';
+type Tab = 'cursor' | 'bg' | 'particles' | 'stamps' | 'trinkets';
 
 interface Opt<T> {
   value: T;
@@ -57,10 +60,13 @@ const PARTICLE_OPTS: Opt<ParticleMode>[] = [
     MatSlider,
     MatSliderThumb,
     MatSlideToggle,
+    TrinketShelfComponent,
+    LootboxPopupComponent,
   ],
 })
 export class ModsPanelComponent {
   private readonly _svc = inject(ModsService);
+  readonly trinketSvc = inject(TrinketService);
 
   isOpen = signal(false);
   activeTab = signal<Tab>('cursor');

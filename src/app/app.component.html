@@ -124,6 +124,34 @@
   <mods-stamps></mods-stamps>
 }
 
+<button
+  class="trophy-fab"
+  (click)="_trinketService.shelfOpen.set(true)"
+  [title]="'Coleção de Trinkets'"
+>
+  <span class="trophy-fab__icon">🏆</span>
+  @if (_trinketService.unlockedIds().length > 0) {
+    <span class="trophy-fab__badge">{{ _trinketService.unlockedIds().length }}</span>
+  }
+</button>
+
+<trophy-shelf></trophy-shelf>
+<trinket-lootbox-popup></trinket-lootbox-popup>
+
+@if (_trinketService.featuredPreview()) {
+  <button
+    class="companion"
+    (click)="_trinketService.shelfOpen.set(true)"
+    title="Ver coleção"
+  >
+    <img
+      [src]="_trinketService.featuredPreview()"
+      alt="Companion"
+      class="companion__img"
+    />
+  </button>
+}
+
 <ng-template #backgroundContextMenu>
   <div style="min-width: 200px; max-width: 300px">
     <button

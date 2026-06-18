@@ -1,0 +1,314 @@
+[
+  {
+    "id": "animal-cat",
+    "nome": "Gato",
+    "descricao": "Um gatinho fofo esperando por você.",
+    "modelo": "animal-cat.glb",
+    "preview": "animal-cat.png",
+    "raridade": "comum",
+    "fonte": {
+      "origem": "Kenney.nl — Cube Pets",
+      "licenca": "CC0 1.0",
+      "url": "https://kenney.nl/assets/cube-pets"
+    }
+  },
+  {
+    "id": "animal-dog",
+    "nome": "Cachorro",
+    "descricao": "Fiel companheiro de produtividade.",
+    "modelo": "animal-dog.glb",
+    "preview": "animal-dog.png",
+    "raridade": "comum",
+    "fonte": {
+      "origem": "Kenney.nl — Cube Pets",
+      "licenca": "CC0 1.0",
+      "url": "https://kenney.nl/assets/cube-pets"
+    }
+  },
+  {
+    "id": "animal-bunny",
+    "nome": "Coelho",
+    "descricao": "Rápido como suas tarefas completadas.",
+    "modelo": "animal-bunny.glb",
+    "preview": "animal-bunny.png",
+    "raridade": "comum",
+    "fonte": {
+      "origem": "Kenney.nl — Cube Pets",
+      "licenca": "CC0 1.0",
+      "url": "https://kenney.nl/assets/cube-pets"
+    }
+  },
+  {
+    "id": "animal-chick",
+    "nome": "Pintinho",
+    "descricao": "Pequeno, mas determinado.",
+    "modelo": "animal-chick.glb",
+    "preview": "animal-chick.png",
+    "raridade": "comum",
+    "fonte": {
+      "origem": "Kenney.nl — Cube Pets",
+      "licenca": "CC0 1.0",
+      "url": "https://kenney.nl/assets/cube-pets"
+    }
+  },
+  {
+    "id": "animal-pig",
+    "nome": "Porco",
+    "descricao": "Trabalha duro e sem reclamar.",
+    "modelo": "animal-pig.glb",
+    "preview": "animal-pig.png",
+    "raridade": "comum",
+    "fonte": {
+      "origem": "Kenney.nl — Cube Pets",
+      "licenca": "CC0 1.0",
+      "url": "https://kenney.nl/assets/cube-pets"
+    }
+  },
+  {
+    "id": "animal-fish",
+    "nome": "Peixe",
+    "descricao": "Nada contra a correnteza.",
+    "modelo": "animal-fish.glb",
+    "preview": "animal-fish.png",
+    "raridade": "comum",
+    "fonte": {
+      "origem": "Kenney.nl — Cube Pets",
+      "licenca": "CC0 1.0",
+      "url": "https://kenney.nl/assets/cube-pets"
+    }
+  },
+  {
+    "id": "animal-bee",
+    "nome": "Abelha",
+    "descricao": "A rainha da produtividade.",
+    "modelo": "animal-bee.glb",
+    "preview": "animal-bee.png",
+    "raridade": "comum",
+    "fonte": {
+      "origem": "Kenney.nl — Cube Pets",
+      "licenca": "CC0 1.0",
+      "url": "https://kenney.nl/assets/cube-pets"
+    }
+  },
+  {
+    "id": "animal-parrot",
+    "nome": "Papagaio",
+    "descricao": "Repete os bons hábitos.",
+    "modelo": "animal-parrot.glb",
+    "preview": "animal-parrot.png",
+    "raridade": "comum",
+    "fonte": {
+      "origem": "Kenney.nl — Cube Pets",
+      "licenca": "CC0 1.0",
+      "url": "https://kenney.nl/assets/cube-pets"
+    }
+  },
+  {
+    "id": "animal-penguin",
+    "nome": "Pinguim",
+    "descricao": "Elegante sob pressão.",
+    "modelo": "animal-penguin.glb",
+    "preview": "animal-penguin.png",
+    "raridade": "incomum",
+    "fonte": {
+      "origem": "Kenney.nl — Cube Pets",
+      "licenca": "CC0 1.0",
+      "url": "https://kenney.nl/assets/cube-pets"
+    }
+  },
+  {
+    "id": "animal-fox",
+    "nome": "Raposa",
+    "descricao": "Esperta e ágil.",
+    "modelo": "animal-fox.glb",
+    "preview": "animal-fox.png",
+    "raridade": "incomum",
+    "fonte": {
+      "origem": "Kenney.nl — Cube Pets",
+      "licenca": "CC0 1.0",
+      "url": "https://kenney.nl/assets/cube-pets"
+    }
+  },
+  {
+    "id": "animal-beaver",
+    "nome": "Castor",
+    "descricao": "Constrói o futuro tarefa por tarefa.",
+    "modelo": "animal-beaver.glb",
+    "preview": "animal-beaver.png",
+    "raridade": "incomum",
+    "fonte": {
+      "origem": "Kenney.nl — Cube Pets",
+      "licenca": "CC0 1.0",
+      "url": "https://kenney.nl/assets/cube-pets"
+    }
+  },
+  {
+    "id": "animal-koala",
+    "nome": "Coala",
+    "descricao": "Calmo, mas consistente.",
+    "modelo": "animal-koala.glb",
+    "preview": "animal-koala.png",
+    "raridade": "incomum",
+    "fonte": {
+      "origem": "Kenney.nl — Cube Pets",
+      "licenca": "CC0 1.0",
+      "url": "https://kenney.nl/assets/cube-pets"
+    }
+  },
+  {
+    "id": "animal-cow",
+    "nome": "Vaca",
+    "descricao": "Produtiva todos os dias, sem falta.",
+    "modelo": "animal-cow.glb",
+    "preview": "animal-cow.png",
+    "raridade": "incomum",
+    "fonte": {
+      "origem": "Kenney.nl — Cube Pets",
+      "licenca": "CC0 1.0",
+      "url": "https://kenney.nl/assets/cube-pets"
+    }
+  },
+  {
+    "id": "animal-monkey",
+    "nome": "Macaco",
+    "descricao": "Resolve problemas de forma criativa.",
+    "modelo": "animal-monkey.glb",
+    "preview": "animal-monkey.png",
+    "raridade": "incomum",
+    "fonte": {
+      "origem": "Kenney.nl — Cube Pets",
+      "licenca": "CC0 1.0",
+      "url": "https://kenney.nl/assets/cube-pets"
+    }
+  },
+  {
+    "id": "animal-deer",
+    "nome": "Cervo",
+    "descricao": "Gracioso e focado.",
+    "modelo": "animal-deer.glb",
+    "preview": "animal-deer.png",
+    "raridade": "incomum",
+    "fonte": {
+      "origem": "Kenney.nl — Cube Pets",
+      "licenca": "CC0 1.0",
+      "url": "https://kenney.nl/assets/cube-pets"
+    }
+  },
+  {
+    "id": "animal-panda",
+    "nome": "Panda",
+    "descricao": "Raro e especial como seus dias mais produtivos.",
+    "modelo": "animal-panda.glb",
+    "preview": "animal-panda.png",
+    "raridade": "raro",
+    "fonte": {
+      "origem": "Kenney.nl — Cube Pets",
+      "licenca": "CC0 1.0",
+      "url": "https://kenney.nl/assets/cube-pets"
+    }
+  },
+  {
+    "id": "animal-crab",
+    "nome": "Caranguejo",
+    "descricao": "Segura firme o que conquistou.",
+    "modelo": "animal-crab.glb",
+    "preview": "animal-crab.png",
+    "raridade": "raro",
+    "fonte": {
+      "origem": "Kenney.nl — Cube Pets",
+      "licenca": "CC0 1.0",
+      "url": "https://kenney.nl/assets/cube-pets"
+    }
+  },
+  {
+    "id": "animal-caterpillar",
+    "nome": "Lagarta",
+    "descricao": "Em transformação constante.",
+    "modelo": "animal-caterpillar.glb",
+    "preview": "animal-caterpillar.png",
+    "raridade": "raro",
+    "fonte": {
+      "origem": "Kenney.nl — Cube Pets",
+      "licenca": "CC0 1.0",
+      "url": "https://kenney.nl/assets/cube-pets"
+    }
+  },
+  {
+    "id": "animal-hog",
+    "nome": "Javali",
+    "descricao": "Força bruta a serviço dos objetivos.",
+    "modelo": "animal-hog.glb",
+    "preview": "animal-hog.png",
+    "raridade": "raro",
+    "fonte": {
+      "origem": "Kenney.nl — Cube Pets",
+      "licenca": "CC0 1.0",
+      "url": "https://kenney.nl/assets/cube-pets"
+    }
+  },
+  {
+    "id": "animal-polar",
+    "nome": "Urso Polar",
+    "descricao": "Resiste a qualquer ambiente.",
+    "modelo": "animal-polar.glb",
+    "preview": "animal-polar.png",
+    "raridade": "raro",
+    "fonte": {
+      "origem": "Kenney.nl — Cube Pets",
+      "licenca": "CC0 1.0",
+      "url": "https://kenney.nl/assets/cube-pets"
+    }
+  },
+  {
+    "id": "animal-elephant",
+    "nome": "Elefante",
+    "descricao": "Nunca esquece uma meta.",
+    "modelo": "animal-elephant.glb",
+    "preview": "animal-elephant.png",
+    "raridade": "raro",
+    "fonte": {
+      "origem": "Kenney.nl — Cube Pets",
+      "licenca": "CC0 1.0",
+      "url": "https://kenney.nl/assets/cube-pets"
+    }
+  },
+  {
+    "id": "animal-giraffe",
+    "nome": "Girafa",
+    "descricao": "Sempre olha além do horizonte.",
+    "modelo": "animal-giraffe.glb",
+    "preview": "animal-giraffe.png",
+    "raridade": "epico",
+    "fonte": {
+      "origem": "Kenney.nl — Cube Pets",
+      "licenca": "CC0 1.0",
+      "url": "https://kenney.nl/assets/cube-pets"
+    }
+  },
+  {
+    "id": "animal-lion",
+    "nome": "Leão",
+    "descricao": "Lidera pelo exemplo.",
+    "modelo": "animal-lion.glb",
+    "preview": "animal-lion.png",
+    "raridade": "epico",
+    "fonte": {
+      "origem": "Kenney.nl — Cube Pets",
+      "licenca": "CC0 1.0",
+      "url": "https://kenney.nl/assets/cube-pets"
+    }
+  },
+  {
+    "id": "animal-tiger",
+    "nome": "Tigre",
+    "descricao": "O mais raro de todos. Conquistado pelos mais dedicados.",
+    "modelo": "animal-tiger.glb",
+    "preview": "animal-tiger.png",
+    "raridade": "epico",
+    "fonte": {
+      "origem": "Kenney.nl — Cube Pets",
+      "licenca": "CC0 1.0",
+      "url": "https://kenney.nl/assets/cube-pets"
+    }
+  }
+]

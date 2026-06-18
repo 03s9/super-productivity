@@ -1,0 +1,86 @@
+@if (isOpen()) {
+  <div class="shelf-overlay">
+    <!-- Header -->
+    <div class="shelf-header">
+      <div class="shelf-title">
+        <mat-icon>emoji_events</mat-icon>
+        <span>Coleção</span>
+        <span class="count">{{ unlockedCount().length }}/24</span>
+        @if (coins() > 0) {
+          <span class="coins-badge">🪙 {{ coins() }}</span>
+        }
+      </div>
+      <button
+        class="close-btn"
+        (click)="close()"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+
+    <!-- Canvas 3D -->
+    <canvas
+      #canvas
+      class="three-canvas"
+      (click)="onCanvasClick($event)"
+    ></canvas>
+
+    <!-- Hint -->
+    @if (!selected()) {
+      <div class="hint">
+        <mat-icon>touch_app</mat-icon>
+        Clique num bicho para ver detalhes · arraste para girar a câmera
+      </div>
+    }
+
+    <!-- Info panel when trinket is selected -->
+    @if (selected(); as t) {
+      <div
+        class="info-panel"
+        [style.--rc]="selectedRarityColor()"
+      >
+        <img
+          [src]="selectedPreview()"
+          [alt]="t.nome"
+          class="info-img"
+        />
+        <div class="info-body">
+          <span
+            class="info-rarity"
+            [style.color]="selectedRarityColor()"
+            [style.border-color]="selectedRarityColor()"
+            >{{ selectedRarityLabel() }}</span
+          >
+          <strong class="info-name">{{ t.nome }}</strong>
+          <p class="info-desc">{{ t.descricao }}</p>
+          <button
+            class="feature-btn"
+            [class.is-featured]="featuredId() === t.id"
+            (click)="setFeatured(t.id)"
+          >
+            <mat-icon>push_pin</mat-icon>
+            {{ featuredId() === t.id ? 'Destacado ✓' : 'Destacar' }}
+          </button>
+        </div>
+        <button
+          class="info-close"
+          (click)="selected.set(null)"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+    }
+
+    <!-- Empty state -->
+    @if (unlockedCount().length === 0) {
+      <div class="empty-state">
+        <mat-icon class="empty-icon">inbox</mat-icon>
+        <p>
+          Bem-vindo à sua coleção!<br />
+          Parece que ainda está vazio por aqui.<br />
+          <small>Complete tarefas para ganhar seus primeiros trinkets.</small>
+        </p>
+      </div>
+    }
+  </div>
+}

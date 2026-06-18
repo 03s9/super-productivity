@@ -1,0 +1,61 @@
+<div class="shelf-header">
+  <span class="count-badge">{{ unlockedCount() }}/{{ totalCount }}</span>
+  <span class="progress-label">Próxima lootbox em {{ nextMilestone() }} tarefas</span>
+</div>
+
+<div class="progress-bar-wrap">
+  <div
+    class="progress-bar-fill"
+    [style.width.%]="progressToNext()"
+  ></div>
+</div>
+
+@if (selectedTrinket(); as sel) {
+  <div
+    class="detail-card"
+    [style.--rarity-color]="rarityColor(sel)"
+  >
+    <img
+      [src]="previewSrc(sel)"
+      [alt]="sel.nome"
+      class="detail-img"
+    />
+    <div class="detail-info">
+      <span
+        class="rarity-badge"
+        [style.color]="rarityColor(sel)"
+        [style.border-color]="rarityColor(sel)"
+        >{{ rarityLabel(sel) }}</span
+      >
+      <strong class="detail-name">{{ sel.nome }}</strong>
+      <p class="detail-desc">{{ sel.descricao }}</p>
+    </div>
+  </div>
+}
+
+<div class="grid">
+  @for (t of allTrinkets; track t.id) {
+    <div
+      class="card"
+      [class.locked]="!isUnlocked(t.id)"
+      [class.selected]="selectedTrinket()?.id === t.id"
+      [style.--rarity-color]="rarityColor(t)"
+      [matTooltip]="isUnlocked(t.id) ? t.nome : '???'"
+      (click)="select(t)"
+    >
+      @if (isUnlocked(t.id)) {
+        <img
+          [src]="previewSrc(t)"
+          [alt]="t.nome"
+          class="card-img"
+        />
+        <div
+          class="rarity-dot"
+          [style.background]="rarityColor(t)"
+        ></div>
+      } @else {
+        <mat-icon class="lock-icon">lock</mat-icon>
+      }
+    </div>
+  }
+</div>

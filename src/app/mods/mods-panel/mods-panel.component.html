@@ -70,6 +70,15 @@
         >
           <mat-icon>collections</mat-icon>
         </button>
+        <button
+          class="tab-btn"
+          [class.active]="activeTab() === 'trinkets'"
+          (click)="activeTab.set('trinkets')"
+          matTooltip="Trinkets"
+          matTooltipPosition="above"
+        >
+          <mat-icon>pets</mat-icon>
+        </button>
       </div>
 
       <!-- ══ CURSOR ══════════════════════════════════ -->
@@ -468,6 +477,13 @@
               </label>
             </div>
           </div>
+        </div>
+      }
+
+      <!-- ══ TRINKETS ════════════════════════════════ -->
+      @if (activeTab() === 'trinkets') {
+        <div class="tab-body">
+          <trinket-shelf></trinket-shelf>
         </div>
       }
     </div>

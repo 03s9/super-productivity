@@ -1,0 +1,60 @@
+@if (trinket(); as t) {
+  <div
+    class="overlay"
+    (click)="dismiss()"
+  >
+    <div
+      class="popup"
+      [style.--rarity-color]="rarityColor()"
+      [style.--rarity-glow]="rarityGlow()"
+      (click)="$event.stopPropagation()"
+    >
+      <button
+        mat-icon-button
+        class="close-btn"
+        (click)="dismiss()"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+
+      <p class="subtitle">
+        {{ isDuplicate() ? 'Já na sua coleção!' : 'Novo trinket desbloqueado!' }}
+      </p>
+
+      <div
+        class="model-wrap"
+        [class.is-duplicate]="isDuplicate()"
+      >
+        <img
+          [src]="previewSrc()"
+          [alt]="t.nome"
+          class="preview-img"
+        />
+      </div>
+
+      @if (isDuplicate()) {
+        <p class="coins-earned">🪙 +{{ coinsEarned() }} moedas</p>
+      }
+
+      <span
+        class="rarity-badge"
+        [style.color]="rarityColor()"
+        [style.border-color]="rarityColor()"
+      >
+        {{ rarityLabel() }}
+      </span>
+
+      <h2 class="trinket-name">{{ t.nome }}</h2>
+      <p class="trinket-desc">{{ t.descricao }}</p>
+
+      <button
+        mat-raised-button
+        class="ok-btn"
+        (click)="dismiss()"
+      >
+        <mat-icon>{{ isDuplicate() ? 'paid' : 'celebration' }}</mat-icon>
+        {{ isDuplicate() ? 'Receber moedas' : 'Incrível!' }}
+      </button>
+    </div>
+  </div>
+}

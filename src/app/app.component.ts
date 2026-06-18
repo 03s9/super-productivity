@@ -91,6 +91,9 @@ import { StampsComponent } from './mods/stamps/stamps.component';
 import { BackgroundComponent } from './mods/background/background.component';
 import { CustomCursorService } from './mods/custom-cursor/custom-cursor.service';
 import { ModsService } from './mods/mods.service';
+import { TrinketService } from './mods/trinkets/trinket.service';
+import { TrophyShelfComponent } from './mods/trinkets/trophy-shelf/trophy-shelf.component';
+import { LootboxPopupComponent } from './mods/trinkets/lootbox-popup/lootbox-popup.component';
 
 const ONBOARDING_PRESET_EXIT_DELAY = 1000;
 const ONBOARDING_ENTRANCE_COMPLETE_DELAY = 2000;
@@ -150,6 +153,8 @@ export const getBackgroundImageBlur = (context: WorkContextThemeSource): number 
     ParticlesComponent,
     StampsComponent,
     BackgroundComponent,
+    TrophyShelfComponent,
+    LootboxPopupComponent,
   ],
 })
 export class AppComponent implements OnDestroy, AfterViewInit {
@@ -192,6 +197,7 @@ export class AppComponent implements OnDestroy, AfterViewInit {
   // Mods — injected for side-effect: cursor service applies CSS on init
   private _customCursorService = inject(CustomCursorService);
   readonly _modsService = inject(ModsService);
+  readonly _trinketService = inject(TrinketService);
   private _hasShownLegacyFileBgSnack = false;
   readonly T = T;
   readonly TODAY_TAG_ID = TODAY_TAG.id;
