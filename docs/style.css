@@ -18,6 +18,7 @@
   --blue: #448aff;
   --teal: #1de9b6;
   --coral: #ff6e6e;
+  --gold: #ffb74d;
   --radius: 12px;
   --radius-sm: 8px;
 }
@@ -42,7 +43,7 @@ a:hover {
   text-decoration: underline;
 }
 
-/* ── Hero ── */
+/* Hero */
 .hero {
   padding: 5rem 2rem 4rem;
   text-align: center;
@@ -143,7 +144,7 @@ a:hover {
   border-color: #6a3de8;
 }
 
-/* ── Sections ── */
+/* Sections */
 .section {
   padding: 3.5rem 2rem;
   max-width: 860px;
@@ -173,7 +174,7 @@ a:hover {
   margin-bottom: 1.5rem;
 }
 
-/* ── Feature cards ── */
+/* Feature cards */
 .grid-4 {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -187,8 +188,16 @@ a:hover {
   padding: 1.25rem;
 }
 
+.card-wide {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
 .card-icon {
-  font-size: 20px;
+  font-size: 18px;
+  font-weight: 700;
   margin-bottom: 0.75rem;
   width: 38px;
   height: 38px;
@@ -196,6 +205,7 @@ a:hover {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
 }
 
 .icon-blue {
@@ -214,6 +224,10 @@ a:hover {
   background: rgba(255, 110, 110, 0.12);
   color: var(--coral);
 }
+.icon-gold {
+  background: rgba(255, 183, 77, 0.15);
+  color: var(--gold);
+}
 
 .card h3 {
   font-size: 14px;
@@ -226,7 +240,14 @@ a:hover {
   line-height: 1.55;
 }
 
-/* ── Screenshots ── */
+.inline-link {
+  display: inline-block;
+  margin-top: 0.5rem;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* Screenshots */
 .screenshots-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -264,7 +285,7 @@ a:hover {
   border-radius: var(--radius);
 }
 
-/* ── Steps ── */
+/* Steps */
 .steps {
   display: flex;
   flex-direction: column;
@@ -324,7 +345,57 @@ code {
   margin-top: 6px;
 }
 
-/* ── Notes ── */
+.step-body code.inline,
+.note code {
+  display: inline;
+  padding: 1px 5px;
+  font-size: 11px;
+  background: rgba(255, 255, 255, 0.06);
+  border: none;
+  color: var(--accent-light);
+}
+
+/* Changelog */
+.changelog {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.changelog-entry {
+  display: flex;
+  gap: 1.25rem;
+  align-items: flex-start;
+}
+
+.changelog-date {
+  min-width: 110px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding-top: 2px;
+}
+
+.changelog-body h4 {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+}
+
+.changelog-body ul {
+  margin-left: 1.1rem;
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.changelog-body li + li {
+  margin-top: 0.25rem;
+}
+
+/* Notes */
 .grid-2 {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -347,16 +418,8 @@ code {
   font-size: 13px;
   color: var(--text-muted);
 }
-.note code {
-  display: inline;
-  padding: 1px 5px;
-  font-size: 11px;
-  background: rgba(255, 255, 255, 0.06);
-  border: none;
-  color: var(--accent-light);
-}
 
-/* ── Footer ── */
+/* Footer */
 .footer {
   padding: 2.5rem 2rem;
   border-top: 1px solid var(--border);
