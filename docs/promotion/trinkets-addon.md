@@ -16,7 +16,7 @@ permalink: /trinkets-addon/
 [![App](https://img.shields.io/badge/App-Super%20Productivity-3b82f6?style=for-the-badge)](https://super-productivity.com)
 [![Branch](https://img.shields.io/badge/Branch-mods-22c55e?style=for-the-badge)](https://github.com/03s9/super-productivity/tree/mods)
 
-[English](#trinkets-addon) | [Portugues](trinkets%20addon.pt.md)
+[English](#trinkets-addon) | [Portugues](pt/)
 
 </div>
 
