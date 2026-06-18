@@ -54,6 +54,20 @@ a:hover {
   margin: 0 auto;
 }
 
+.credits-top {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 0.75rem;
+}
+
+.credits-top a {
+  color: var(--text-muted);
+  text-decoration: underline;
+}
+.credits-top a:hover {
+  color: var(--accent-light);
+}
+
 .badge {
   display: inline-block;
   font-size: 11px;
