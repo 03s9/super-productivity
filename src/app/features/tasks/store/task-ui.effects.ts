@@ -32,6 +32,7 @@ import { SnackService } from '../../../core/snack/snack.service';
 import { WorkContextService } from '../../work-context/work-context.service';
 import { GlobalConfigService } from '../../config/global-config.service';
 import { playDoneSound } from '../util/play-done-sound';
+import { SoundService } from '../../../core/sound/sound.service';
 import { Task } from '../task.model';
 import { EMPTY } from 'rxjs';
 import { selectProjectById } from '../../project/store/project.selectors';
@@ -58,6 +59,7 @@ export class TaskUiEffects {
   private _navigateToTaskService = inject(NavigateToTaskService);
   private _layoutService = inject(LayoutService);
   private _dateService = inject(DateService);
+  private _soundService = inject(SoundService);
 
   taskCreatedSnack$ = createEffect(
     () =>
@@ -210,7 +212,11 @@ export class TaskUiEffects {
           this._workContextService.flatDoneTodayNr$,
           this._globalConfigService.sound$,
         ),
-        filter(([, , soundCfg]) => !!soundCfg.doneSound),
+        // Skip the built-in bell when our SoundService is handling task-done sounds
+        filter(
+          ([, , soundCfg]) =>
+            !!soundCfg.doneSound && this._soundService.config().taskDoneSound === 'off',
+        ),
         tap(([, doneToday, soundCfg]) => playDoneSound(soundCfg, doneToday)),
       ),
     { dispatch: false },

@@ -103,6 +103,7 @@ import { TaskLog } from '../../core/log';
 import { devError } from '../../util/dev-error';
 import { DEFAULT_GLOBAL_CONFIG } from '../config/default-global-config.const';
 import { TaskFocusService } from './task-focus.service';
+import { SoundService } from '../../core/sound/sound.service';
 import { DeletedTaskIssueSidecarService } from '../issue/two-way-sync/deleted-task-issue-sidecar.service';
 import { TimeBlockDeleteSidecarService } from '../calendar-integration/time-block/time-block-delete-sidecar.service';
 import { getDeadlineAutoPlanFields } from './util/get-deadline-auto-plan-fields';
@@ -121,6 +122,7 @@ export class TaskService {
   private readonly _taskArchiveService = inject(TaskArchiveService);
   private readonly _globalConfigService = inject(GlobalConfigService);
   private readonly _taskFocusService = inject(TaskFocusService);
+  private readonly _soundService = inject(SoundService);
   private readonly _deletedTaskIssueSidecar = inject(DeletedTaskIssueSidecarService);
   private readonly _timeBlockDeleteSidecar = inject(TimeBlockDeleteSidecarService);
 
@@ -1139,6 +1141,9 @@ export class TaskService {
       return undefined;
     } else {
       setAnimation(true);
+      // Play sound synchronously inside the user-gesture handler so the
+      // AudioContext is not blocked by the browser's autoplay policy.
+      this._soundService.playTaskDoneSound();
       return window.setTimeout(() => this.setDone(taskId), 200);
     }
   }

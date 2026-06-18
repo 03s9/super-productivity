@@ -1,0 +1,465 @@
+// ── Host / FAB wrapper ────────────────────────────────────
+.mods-fab-wrap {
+  position: fixed;
+  bottom: 84px;
+  right: 24px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.mods-fab {
+  background: linear-gradient(135deg, #7c4dff, #e040fb) !important;
+  color: #fff !important;
+  box-shadow: 0 4px 14px rgba(124, 77, 255, 0.5);
+  transition:
+    transform 0.15s,
+    box-shadow 0.15s;
+  &:hover {
+    transform: scale(1.08);
+    box-shadow: 0 6px 18px rgba(124, 77, 255, 0.65);
+  }
+}
+
+// ── Panel ─────────────────────────────────────────────────
+.mods-panel {
+  width: 340px;
+  max-height: 75vh;
+  background: var(--bg-higher, #242424);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.55);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: slideUp 0.18s ease;
+
+  ::ng-deep .mat-mdc-tab-group {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  ::ng-deep .mat-mdc-tab-body-wrapper {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+  }
+  ::ng-deep .mat-mdc-tab-body-content {
+    overflow: hidden;
+  }
+  ::ng-deep .mat-mdc-tab-header {
+    background: transparent;
+  }
+  ::ng-deep .mdc-tab__text-label {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// ── Header ────────────────────────────────────────────────
+.panel-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 16px 10px;
+  color: var(--text, #fff);
+  font-size: 15px;
+  font-weight: 700;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  flex-shrink: 0;
+
+  .close-btn {
+    margin-left: auto;
+    width: 28px;
+    height: 28px;
+    line-height: 28px;
+  }
+}
+
+// ── Custom tab bar ────────────────────────────────────────
+.tab-bar {
+  display: flex;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  flex-shrink: 0;
+}
+
+.tab-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 44px;
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.45);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition:
+    color 0.15s,
+    border-color 0.15s;
+
+  mat-icon {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+  }
+
+  &:hover {
+    color: rgba(255, 255, 255, 0.8);
+  }
+  &.active {
+    color: #b388ff;
+    border-bottom-color: #7c4dff;
+  }
+}
+
+// ── Tab body ─────────────────────────────────────────────
+.tab-body {
+  padding: 14px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+// ── Toggle row ────────────────────────────────────────────
+.toggle-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 13px;
+  color: var(--text, #fff);
+}
+
+// ── Chips ─────────────────────────────────────────────────
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px 11px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.14s;
+
+  mat-icon {
+    font-size: 14px;
+    width: 14px;
+    height: 14px;
+  }
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+  }
+  &.active {
+    background: rgba(124, 77, 255, 0.35);
+    border-color: #7c4dff;
+    color: #fff;
+  }
+}
+
+// ── Slider row ────────────────────────────────────────────
+.slider-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.65);
+
+  .val {
+    min-width: 36px;
+    text-align: right;
+    font-size: 11px;
+  }
+}
+
+// ── Color row ─────────────────────────────────────────────
+.color-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.color-pick {
+  width: 42px;
+  height: 28px;
+  padding: 0;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background: none;
+}
+
+// ── URL row ───────────────────────────────────────────────
+.url-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.url-input {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  padding: 7px 10px;
+  color: var(--text, #fff);
+  font-size: 12px;
+  outline: none;
+  min-width: 0;
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.3);
+  }
+  &:focus {
+    border-color: #7c4dff;
+  }
+}
+
+// ── Upload button ─────────────────────────────────────────
+.upload-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  border-radius: 10px;
+  border: 1px dashed rgba(255, 255, 255, 0.25);
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.14s;
+  width: 100%;
+
+  mat-icon {
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+  }
+
+  &:hover {
+    border-color: #7c4dff;
+    color: #fff;
+    background: rgba(124, 77, 255, 0.1);
+  }
+  &.sm {
+    width: auto;
+    padding: 5px 10px;
+  }
+}
+
+// ── Add section ───────────────────────────────────────────
+.add-section {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 4px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.add-controls {
+  display: flex;
+  gap: 6px;
+}
+
+.btn-row {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.add-btn {
+  flex: 1;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+}
+
+// ── Mini select ──────────────────────────────────────────
+.mini-select {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 6px;
+  color: var(--text, #fff);
+  font-size: 11px;
+  padding: 3px 6px;
+  cursor: pointer;
+  option {
+    background: #2a2a2a;
+  }
+}
+
+// ── Sprite row ────────────────────────────────────────────
+.sprite-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 8px;
+  padding: 6px 8px;
+}
+
+.sprite-thumb {
+  width: 38px;
+  height: 38px;
+  object-fit: contain;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.2);
+  flex-shrink: 0;
+}
+
+// ── Stamp list ────────────────────────────────────────────
+.stamp-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.stamp-item-row {
+  position: relative;
+  width: 66px;
+  height: 66px;
+
+  .stamp-thumb {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: block;
+  }
+
+  .del-btn {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    width: 22px;
+    height: 22px;
+    line-height: 22px;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.15s;
+    padding: 0;
+    mat-icon {
+      font-size: 13px;
+      width: 13px;
+      height: 13px;
+    }
+  }
+
+  &:hover .del-btn {
+    opacity: 1;
+  }
+}
+
+// ── Cursor preview ────────────────────────────────────────
+.cursor-preview {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.6);
+
+  img {
+    max-width: 48px;
+    max-height: 48px;
+    image-rendering: pixelated;
+  }
+}
+
+// ── Delete btn (sprite) ───────────────────────────────────
+.del-btn {
+  width: 28px;
+  height: 28px;
+  line-height: 28px;
+  color: rgba(255, 100, 100, 0.7);
+  margin-left: auto;
+  mat-icon {
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+  }
+}
+
+// ── Shape buttons (stamp) ─────────────────────────────────
+.shape-btns {
+  display: flex;
+  gap: 2px;
+  margin-top: 4px;
+}
+
+.shape-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.12s;
+
+  mat-icon {
+    font-size: 14px;
+    width: 14px;
+    height: 14px;
+  }
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+  }
+  &.active {
+    background: rgba(124, 77, 255, 0.35);
+    border-color: #7c4dff;
+    color: #b388ff;
+  }
+}
+
+// ── Hint text ─────────────────────────────────────────────
+.hint-text {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.4);
+  margin: 0;
+
+  .hint-icon {
+    font-size: 14px;
+    width: 14px;
+    height: 14px;
+  }
+}

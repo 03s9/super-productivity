@@ -1,0 +1,57 @@
+@if (isVisible()) {
+  <div
+    class="stamps-wrapper"
+    [class.is-open]="isPanelOpen()"
+  >
+    <!-- Tab trigger — clique para abrir, arraste para mover -->
+    <button
+      class="stamps-tab"
+      (pointerdown)="onTabPointerDown($event)"
+      (pointermove)="onTabPointerMove($event)"
+      (pointerup)="onTabPointerUp($event)"
+      (click)="onTabClick()"
+      matTooltip="Stamps · Arraste para mover"
+      matTooltipPosition="right"
+    >
+      <mat-icon>collections</mat-icon>
+    </button>
+
+    <!-- Stamps panel -->
+    @if (isPanelOpen()) {
+      <div class="stamps-panel">
+        <div class="stamps-panel-header">
+          <mat-icon>collections</mat-icon>
+          <span>Stamps</span>
+          <button
+            mat-icon-button
+            class="close-btn"
+            (click)="togglePanel()"
+          >
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+
+        <div class="stamps-grid">
+          @for (stamp of stamps(); track stamp.id) {
+            <div
+              class="stamp-item"
+              [class.has-link]="!!stamp.link"
+              (click)="openLink(stamp.link)"
+              [matTooltip]="stamp.link ? 'Abrir link' : ''"
+            >
+              <img
+                [src]="stamp.url"
+                [alt]="stamp.link ?? ''"
+                (error)="onImgError($event)"
+              />
+            </div>
+          } @empty {
+            <p class="empty-msg">
+              Nenhum stamp ainda.<br />Adicione pelo painel de Mods.
+            </p>
+          }
+        </div>
+      </div>
+    }
+  </div>
+}

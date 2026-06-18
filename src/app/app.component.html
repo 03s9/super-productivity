@@ -113,6 +113,17 @@
   ></context-menu>
 }
 
+<mods-background></mods-background>
+<sound-settings-panel></sound-settings-panel>
+<mods-panel></mods-panel>
+
+@if (_modsService.config().particles.enabled) {
+  <mods-particles></mods-particles>
+}
+@if (_modsService.config().stamps.visible) {
+  <mods-stamps></mods-stamps>
+}
+
 <ng-template #backgroundContextMenu>
   <div style="min-width: 200px; max-width: 300px">
     <button

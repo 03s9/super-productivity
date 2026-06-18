@@ -1,0 +1,134 @@
+<!-- Floating toggle button -->
+<button
+  mat-icon-button
+  class="sound-fab"
+  [matTooltip]="isOpen() ? 'Fechar Sons' : 'Configurar Sons'"
+  (click)="togglePanel()"
+>
+  <mat-icon>{{ isOpen() ? 'close' : 'music_note' }}</mat-icon>
+</button>
+
+@if (isOpen()) {
+  <div class="sound-panel">
+    <div class="panel-header">
+      <mat-icon class="panel-icon">headphones</mat-icon>
+      <span class="panel-title">Configurações de Som</span>
+    </div>
+
+    <!-- Volume -->
+    <div class="panel-section">
+      <div class="section-label">
+        <mat-icon>volume_up</mat-icon>
+        <span>Volume</span>
+      </div>
+      <mat-slider
+        min="0"
+        max="1"
+        step="0.05"
+        class="volume-slider"
+      >
+        <input
+          matSliderThumb
+          [value]="volume()"
+          (valueChange)="setVolume($event)"
+        />
+      </mat-slider>
+    </div>
+
+    <div class="panel-divider"></div>
+
+    <!-- Typing sound -->
+    <div class="panel-section">
+      <div class="section-label">
+        <mat-icon>keyboard</mat-icon>
+        <span>Som ao digitar</span>
+        <button
+          mat-icon-button
+          class="preview-btn"
+          matTooltip="Pré-visualizar"
+          (click)="previewTyping()"
+        >
+          <mat-icon>play_circle</mat-icon>
+        </button>
+      </div>
+
+      <div class="sound-options">
+        @for (opt of typingOptions; track opt.value) {
+          <button
+            class="sound-chip"
+            [class.active]="typingSound() === opt.value"
+            (click)="
+              opt.value === 'custom' ? typingFileInput.click() : setTypingSound(opt.value)
+            "
+            [matTooltip]="opt.label"
+          >
+            <mat-icon>{{ opt.icon }}</mat-icon>
+            <span>{{ opt.label }}</span>
+          </button>
+        }
+      </div>
+
+      <input
+        #typingFileInput
+        type="file"
+        accept="audio/*"
+        class="hidden-input"
+        (change)="importTyping($event)"
+      />
+
+      @if (typingSound() === 'custom' && !hasCustomTyping()) {
+        <p class="hint">
+          Clique em "Personalizado" para importar um arquivo de áudio (MP3, WAV, OGG…)
+        </p>
+      }
+    </div>
+
+    <div class="panel-divider"></div>
+
+    <!-- Task done sound -->
+    <div class="panel-section">
+      <div class="section-label">
+        <mat-icon>check_circle</mat-icon>
+        <span>Som ao concluir tarefa</span>
+        <button
+          mat-icon-button
+          class="preview-btn"
+          matTooltip="Pré-visualizar"
+          (click)="previewDone()"
+        >
+          <mat-icon>play_circle</mat-icon>
+        </button>
+      </div>
+
+      <div class="sound-options">
+        @for (opt of doneOptions; track opt.value) {
+          <button
+            class="sound-chip"
+            [class.active]="taskDoneSound() === opt.value"
+            (click)="
+              opt.value === 'custom' ? doneFileInput.click() : setTaskDoneSound(opt.value)
+            "
+            [matTooltip]="opt.label"
+          >
+            <mat-icon>{{ opt.icon }}</mat-icon>
+            <span>{{ opt.label }}</span>
+          </button>
+        }
+      </div>
+
+      <input
+        #doneFileInput
+        type="file"
+        accept="audio/*"
+        class="hidden-input"
+        (change)="importDone($event)"
+      />
+
+      @if (taskDoneSound() === 'custom' && !hasCustomDone()) {
+        <p class="hint">
+          Clique em "Personalizado" para importar um arquivo de áudio (MP3, WAV, OGG…)
+        </p>
+      }
+    </div>
+  </div>
+}

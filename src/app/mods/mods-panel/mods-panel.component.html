@@ -1,0 +1,475 @@
+<div class="mods-fab-wrap">
+  <button
+    mat-mini-fab
+    class="mods-fab"
+    (click)="togglePanel()"
+    matTooltip="Mods"
+    matTooltipPosition="left"
+  >
+    <mat-icon>palette</mat-icon>
+  </button>
+
+  @if (isOpen()) {
+    <div class="mods-panel">
+      <div class="panel-header">
+        <mat-icon>palette</mat-icon>
+        <span>Mods</span>
+        <button
+          mat-icon-button
+          class="reset-btn"
+          (click)="resetAll()"
+          matTooltip="Resetar tudo"
+          matTooltipPosition="above"
+        >
+          <mat-icon>restart_alt</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          class="close-btn"
+          (click)="togglePanel()"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+
+      <!-- ── Tab bar ──────────────────────────────────── -->
+      <div class="tab-bar">
+        <button
+          class="tab-btn"
+          [class.active]="activeTab() === 'cursor'"
+          (click)="activeTab.set('cursor')"
+          matTooltip="Cursor"
+          matTooltipPosition="above"
+        >
+          <mat-icon>near_me</mat-icon>
+        </button>
+        <button
+          class="tab-btn"
+          [class.active]="activeTab() === 'bg'"
+          (click)="activeTab.set('bg')"
+          matTooltip="Fundo"
+          matTooltipPosition="above"
+        >
+          <mat-icon>wallpaper</mat-icon>
+        </button>
+        <button
+          class="tab-btn"
+          [class.active]="activeTab() === 'particles'"
+          (click)="activeTab.set('particles')"
+          matTooltip="Partículas"
+          matTooltipPosition="above"
+        >
+          <mat-icon>auto_awesome</mat-icon>
+        </button>
+        <button
+          class="tab-btn"
+          [class.active]="activeTab() === 'stamps'"
+          (click)="activeTab.set('stamps')"
+          matTooltip="Stamps"
+          matTooltipPosition="above"
+        >
+          <mat-icon>collections</mat-icon>
+        </button>
+      </div>
+
+      <!-- ══ CURSOR ══════════════════════════════════ -->
+      @if (activeTab() === 'cursor') {
+        <div class="tab-body">
+          <div class="toggle-row">
+            <span>Cursor personalizado</span>
+            <mat-slide-toggle
+              [checked]="cursor().enabled"
+              (change)="setCursorEnabled($event.checked)"
+            ></mat-slide-toggle>
+          </div>
+
+          @if (cursor().enabled) {
+            <div class="slider-row">
+              <span>Tamanho</span>
+              <mat-slider
+                min="16"
+                max="128"
+                step="4"
+                style="flex: 1"
+              >
+                <input
+                  matSliderThumb
+                  [value]="cursor().size"
+                  (valueChange)="setCursorSize($event)"
+                />
+              </mat-slider>
+              <span class="val">{{ cursor().size }}px</span>
+            </div>
+            <div class="slider-row">
+              <span>Opacidade</span>
+              <mat-slider
+                min="0.1"
+                max="1"
+                step="0.05"
+                style="flex: 1"
+              >
+                <input
+                  matSliderThumb
+                  [value]="cursor().opacity"
+                  (valueChange)="setCursorOpacity($event)"
+                />
+              </mat-slider>
+              <span class="val">{{ (cursor().opacity * 100).toFixed(0) }}%</span>
+            </div>
+            <div class="chips">
+              @for (opt of cursorOpts; track opt.value) {
+                <button
+                  class="chip"
+                  [class.active]="cursor().preset === opt.value"
+                  (click)="setCursorPreset(opt.value)"
+                >
+                  <mat-icon>{{ opt.icon }}</mat-icon> {{ opt.label }}
+                </button>
+              }
+            </div>
+
+            @if (cursor().preset === 'custom') {
+              <label class="upload-btn">
+                <mat-icon>mouse</mat-icon> Cursor normal (idle)
+                <input
+                  type="file"
+                  accept="image/png,image/gif,image/webp,.cur"
+                  (change)="importCursorFile($event)"
+                  hidden
+                />
+              </label>
+              @if (cursor().customUrl) {
+                <div class="cursor-preview">
+                  <img
+                    [src]="cursor().customUrl"
+                    alt="cursor"
+                  />
+                  <span>Normal carregado ✓</span>
+                </div>
+              }
+
+              <label class="upload-btn">
+                <mat-icon>front_hand</mat-icon> Cursor hover (pointer)
+                <input
+                  type="file"
+                  accept="image/png,image/gif,image/webp,.cur"
+                  (change)="importPointerFile($event)"
+                  hidden
+                />
+              </label>
+              @if (cursor().customPointerUrl) {
+                <div class="cursor-preview">
+                  <img
+                    [src]="cursor().customPointerUrl"
+                    alt="pointer"
+                  />
+                  <span>Hover carregado ✓</span>
+                </div>
+              }
+            }
+          }
+        </div>
+      }
+
+      <!-- ══ FUNDO ════════════════════════════════════ -->
+      @if (activeTab() === 'bg') {
+        <div class="tab-body">
+          <div class="toggle-row">
+            <span>Fundo personalizado</span>
+            <mat-slide-toggle
+              [checked]="bg().enabled"
+              (change)="setBgEnabled($event.checked)"
+            ></mat-slide-toggle>
+          </div>
+
+          @if (bg().enabled) {
+            <div class="chips">
+              <button
+                class="chip"
+                [class.active]="bg().type === 'color'"
+                (click)="setBgType('color')"
+              >
+                <mat-icon>palette</mat-icon> Cor sólida
+              </button>
+              <button
+                class="chip"
+                [class.active]="bg().type === 'image'"
+                (click)="setBgType('image')"
+              >
+                <mat-icon>image</mat-icon> Imagem
+              </button>
+            </div>
+
+            @if (bg().type === 'color') {
+              <div class="color-row">
+                <span>Cor de fundo</span>
+                <input
+                  type="color"
+                  [value]="bg().color"
+                  (input)="setBgColor($event)"
+                  class="color-pick"
+                />
+              </div>
+            }
+
+            @if (bg().type === 'image') {
+              <label class="upload-btn">
+                <mat-icon>upload</mat-icon> Importar imagem local
+                <input
+                  type="file"
+                  accept="image/*"
+                  (change)="importBgFile($event)"
+                  hidden
+                />
+              </label>
+              <div class="url-row">
+                <input
+                  class="url-input"
+                  placeholder="ou cole uma URL de imagem..."
+                  [value]="newBgUrl()"
+                  (input)="newBgUrl.set($any($event.target).value)"
+                />
+                <button
+                  mat-icon-button
+                  (click)="applyBgUrl()"
+                  matTooltip="Aplicar"
+                >
+                  <mat-icon>check</mat-icon>
+                </button>
+              </div>
+              <div class="slider-row">
+                <span>Desfoque</span>
+                <mat-slider
+                  min="0"
+                  max="20"
+                  step="1"
+                  style="flex: 1"
+                >
+                  <input
+                    matSliderThumb
+                    [value]="bg().blur"
+                    (valueChange)="setBgBlur($event)"
+                  />
+                </mat-slider>
+              </div>
+            }
+
+            <div class="slider-row">
+              <span>Opacidade</span>
+              <mat-slider
+                min="0"
+                max="1"
+                step="0.05"
+                style="flex: 1"
+              >
+                <input
+                  matSliderThumb
+                  [value]="bg().opacity"
+                  (valueChange)="setBgOpacity($event)"
+                />
+              </mat-slider>
+            </div>
+          }
+        </div>
+      }
+
+      <!-- ══ PARTÍCULAS ═══════════════════════════════ -->
+      @if (activeTab() === 'particles') {
+        <div class="tab-body">
+          <div class="toggle-row">
+            <span>Partículas de fundo</span>
+            <mat-slide-toggle
+              [checked]="particles().enabled"
+              (change)="setParticlesEnabled($event.checked)"
+            ></mat-slide-toggle>
+          </div>
+
+          @if (particles().enabled) {
+            <div class="chips">
+              @for (opt of particleOpts; track opt.value) {
+                <button
+                  class="chip"
+                  [class.active]="particles().mode === opt.value"
+                  (click)="setParticleMode(opt.value)"
+                >
+                  <mat-icon>{{ opt.icon }}</mat-icon> {{ opt.label }}
+                </button>
+              }
+            </div>
+
+            @if (
+              particles().mode !== 'confetti' &&
+              particles().mode !== 'petals' &&
+              particles().mode !== 'snow'
+            ) {
+              <div class="color-row">
+                <span>Cor</span>
+                <input
+                  type="color"
+                  [value]="particles().color"
+                  (input)="setParticleColor($event)"
+                  class="color-pick"
+                />
+              </div>
+            }
+
+            @if (particles().mode !== 'matrix' && particles().mode !== 'sparkles') {
+              <div class="slider-row">
+                <span>Qtd</span>
+                <mat-slider
+                  min="10"
+                  max="200"
+                  step="5"
+                  style="flex: 1"
+                >
+                  <input
+                    matSliderThumb
+                    [value]="particles().count"
+                    (valueChange)="setParticleCount($event)"
+                  />
+                </mat-slider>
+                <span class="val">{{ particles().count }}</span>
+              </div>
+            }
+
+            <div class="slider-row">
+              <span>Velocidade</span>
+              <mat-slider
+                min="0.1"
+                max="3"
+                step="0.1"
+                style="flex: 1"
+              >
+                <input
+                  matSliderThumb
+                  [value]="particles().speed"
+                  (valueChange)="setParticleSpeed($event)"
+                />
+              </mat-slider>
+            </div>
+            <div class="slider-row">
+              <span>Opacidade</span>
+              <mat-slider
+                min="0.1"
+                max="1"
+                step="0.05"
+                style="flex: 1"
+              >
+                <input
+                  matSliderThumb
+                  [value]="particles().opacity"
+                  (valueChange)="setParticleOpacity($event)"
+                />
+              </mat-slider>
+            </div>
+          }
+        </div>
+      }
+
+      <!-- ══ STAMPS ═══════════════════════════════════ -->
+      @if (activeTab() === 'stamps') {
+        <div class="tab-body">
+          <div class="toggle-row">
+            <span>Mostrar stamps</span>
+            <mat-slide-toggle
+              [checked]="stamps().visible"
+              (change)="setStampsVisible($event.checked)"
+            ></mat-slide-toggle>
+          </div>
+
+          <p class="hint-text">
+            <mat-icon class="hint-icon">drag_indicator</mat-icon>
+            Arraste cada stamp na tela para posicioná-lo
+          </p>
+
+          <div class="slider-row">
+            <span>Tamanho base</span>
+            <mat-slider
+              min="50"
+              max="250"
+              step="10"
+              style="flex: 1"
+            >
+              <input
+                matSliderThumb
+                [value]="stamps().size"
+                (valueChange)="setStampSize($event)"
+              />
+            </mat-slider>
+            <span class="val">{{ stamps().size }}px</span>
+          </div>
+
+          <div class="stamp-list">
+            @for (stamp of stamps().items; track stamp.id) {
+              <div class="stamp-item-row">
+                <img
+                  [src]="stamp.url"
+                  class="stamp-thumb"
+                  alt=""
+                />
+
+                <!-- Shape buttons (Etapa 3 & 5) -->
+                <div class="shape-btns">
+                  <button
+                    class="shape-btn"
+                    [class.active]="stamp.shape === 'square' || !stamp.shape"
+                    (click)="setStampShape(stamp.id, 'square')"
+                    matTooltip="Quadrado"
+                  >
+                    <mat-icon>crop_square</mat-icon>
+                  </button>
+                  <button
+                    class="shape-btn"
+                    [class.active]="stamp.shape === 'oval'"
+                    (click)="setStampShape(stamp.id, 'oval')"
+                    matTooltip="Oval"
+                  >
+                    <mat-icon>circle</mat-icon>
+                  </button>
+                  <button
+                    class="shape-btn"
+                    [class.active]="stamp.shape === 'rect-h'"
+                    (click)="setStampShape(stamp.id, 'rect-h')"
+                    matTooltip="Retângulo H"
+                  >
+                    <mat-icon>crop_landscape</mat-icon>
+                  </button>
+                  <button
+                    class="shape-btn"
+                    [class.active]="stamp.shape === 'rect-v'"
+                    (click)="setStampShape(stamp.id, 'rect-v')"
+                    matTooltip="Retângulo V"
+                  >
+                    <mat-icon>crop_portrait</mat-icon>
+                  </button>
+                </div>
+
+                <button
+                  mat-icon-button
+                  class="del-btn"
+                  (click)="removeStamp(stamp.id)"
+                >
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+            }
+          </div>
+
+          <div class="add-section">
+            <div class="btn-row">
+              <label class="upload-btn sm">
+                <mat-icon>upload</mat-icon> Importar arquivo
+                <input
+                  type="file"
+                  accept="image/*"
+                  (change)="importStampFile($event)"
+                  hidden
+                />
+              </label>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  }
+</div>

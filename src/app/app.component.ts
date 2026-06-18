@@ -83,6 +83,14 @@ import { OnboardingHintComponent } from './features/onboarding/onboarding-hint.c
 import { OnboardingHintService } from './features/onboarding/onboarding-hint.service';
 import { MaterialIconsLoaderService } from './ui/material-icons-loader.service';
 import { BrowserTitleService } from './core/browser-title/browser-title.service';
+import { SoundService } from './core/sound/sound.service';
+import { SoundSettingsPanelComponent } from './core/sound/sound-settings-panel/sound-settings-panel.component';
+import { ModsPanelComponent } from './mods/mods-panel/mods-panel.component';
+import { ParticlesComponent } from './mods/particles/particles.component';
+import { StampsComponent } from './mods/stamps/stamps.component';
+import { BackgroundComponent } from './mods/background/background.component';
+import { CustomCursorService } from './mods/custom-cursor/custom-cursor.service';
+import { ModsService } from './mods/mods.service';
 
 const ONBOARDING_PRESET_EXIT_DELAY = 1000;
 const ONBOARDING_ENTRANCE_COMPLETE_DELAY = 2000;
@@ -137,6 +145,11 @@ export const getBackgroundImageBlur = (context: WorkContextThemeSource): number 
     MobileBottomNavComponent,
     OnboardingPresetSelectionComponent,
     OnboardingHintComponent,
+    SoundSettingsPanelComponent,
+    ModsPanelComponent,
+    ParticlesComponent,
+    StampsComponent,
+    BackgroundComponent,
   ],
 })
 export class AppComponent implements OnDestroy, AfterViewInit {
@@ -175,6 +188,10 @@ export class AppComponent implements OnDestroy, AfterViewInit {
   readonly _store = inject(Store);
   private _sectionService = inject(SectionService);
   private _browserTitleService = inject(BrowserTitleService);
+  private _soundService = inject(SoundService);
+  // Mods — injected for side-effect: cursor service applies CSS on init
+  private _customCursorService = inject(CustomCursorService);
+  readonly _modsService = inject(ModsService);
   private _hasShownLegacyFileBgSnack = false;
   readonly T = T;
   readonly TODAY_TAG_ID = TODAY_TAG.id;
@@ -530,14 +547,30 @@ export class AppComponent implements OnDestroy, AfterViewInit {
         });
       };
 
+      const onKeyDownPencil = (ev: KeyboardEvent): void => {
+        if (this._soundService.isSilentKey(ev.key)) return;
+        // Only play when the user is actually typing inside an editable element
+        const target = ev.target as HTMLElement;
+        const isEditable =
+          target instanceof HTMLInputElement ||
+          target instanceof HTMLTextAreaElement ||
+          target.isContentEditable;
+        if (!isEditable) return;
+        // Skip keyboard shortcuts (Ctrl/Cmd combos)
+        if (ev.ctrlKey || ev.metaKey || ev.altKey) return;
+        this._soundService.playTypingSound();
+      };
+
       doc.addEventListener('dragover', onDragOver, { passive: false });
       doc.addEventListener('drop', onDrop, { passive: false });
       doc.addEventListener('keydown', onKeyDown);
+      doc.addEventListener('keydown', onKeyDownPencil, { passive: true });
 
       this._destroyRef.onDestroy(() => {
         doc.removeEventListener('dragover', onDragOver);
         doc.removeEventListener('drop', onDrop);
         doc.removeEventListener('keydown', onKeyDown);
+        doc.removeEventListener('keydown', onKeyDownPencil);
       });
     });
   }
